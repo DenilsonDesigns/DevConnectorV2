@@ -13,6 +13,8 @@ import store from "./store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentuser, logoutUser } from "./actions/authActions";
+import Dashboard from "./components/dashboard/Dashboard";
+import { clearCurrentProfile } from "./actions/profileActions";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -24,7 +26,7 @@ if (localStorage.jwtToken) {
     //logout user
     store.dispatch(logoutUser());
     //clear current profile
-    //@TODO
+    store.dispatch(clearCurrentProfile());
     //REDIRECT TO LOGIN
     window.location.href = "/login";
   }
@@ -41,6 +43,7 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/dashboard" component={Dashboard} />
             </div>
             <Footer />
           </div>
